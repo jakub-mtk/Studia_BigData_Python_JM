@@ -1,0 +1,59 @@
+# Ćwiczenie 30
+# Czujnik zarejestrował następujące odczyty:
+# readings = [18, 21, -1, 20, 24, 19, -3, 22]
+# Wartości ujemne oznaczają niepoprawne odczyty. Napisz program, który:
+# 1. definiuje funkcję clean_readings(values), zwracającą nową listę zawierającą wyłącznie nieujemne
+# odczyty;
+# 2. wyświetla listę pierwotną i listę oczyszczoną;
+# 3. wyświetla liczbę usuniętych odczytów;
+# 4. korzysta z funkcji summarize() z ćwiczenia 28, aby wyświetlić liczbę poprawnych odczytów oraz ich
+# wartość minimalną, wartość maksymalną i średnią arytmetyczną;
+# 5. korzysta z funkcji values_above() z ćwiczenia 27, aby znaleźć poprawne odczyty większe niż 20, a
+# następnie wyświetla ich liczbę;
+
+readings = [18, 21, -1, 20, 24, 19, -3, 22]
+
+
+def clean_readings(values):
+    return [x for x in readings if x > 0]
+
+readings_updated = clean_readings(readings)
+
+unique = []
+
+for i in readings:
+    if i not in readings_updated and i in readings:
+        unique.append(i)
+
+
+print(f'lista pierwotna: {readings}')
+print(f'lista oczyszczona: {clean_readings(readings)}')
+print(f'wartosci usuniete: {unique}')
+print(f'usuniete odczyty: {len(unique)}')
+
+
+def calculate_mean(values):
+    return sum(values)/len(values)
+
+
+def summarize(values):
+    return {
+        "count": len(values),
+        "min": min(values),
+        "max": max(values),
+        "mean": calculate_mean(values) if len(values) != 0 else None
+    }
+
+
+print(
+    f'liczba poprawnych odczytow, minimum, maximum i srednia: {summarize(readings_updated)}')
+
+
+def values_above(values):
+    u_values = [x for x in values if x > 20]
+    return u_values
+
+
+print(f'poprawne odczyty powyzej 20: {values_above(readings_updated)}')
+print(
+    f'liczba poprawnych odczytow powyzej 20: {len(values_above(readings_updated))}')
